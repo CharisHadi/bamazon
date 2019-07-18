@@ -1,12 +1,21 @@
 //Packages
+require("dotenv").config();
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-
+var keys = require("./pass.js")
 
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'BigMoodHugeDude2142',
+    password: keys.pass,
     database: 'bamazon'
 });
 
+connection.connect();
+ 
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+ 
+connection.end();
