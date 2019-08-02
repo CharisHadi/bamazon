@@ -27,10 +27,8 @@ console.log("Welcome to BAMazon!");
 
 
 connection.connect();
-var connect = 1;
 
-while (connect === 1){
-    var print_arr = [];
+var print_arr = [];
 connection.query('select * from products', (err, res, fields) => {
     for(var i = 0; i < res.length; i++){
         print_arr.push(res[i].product_name);
@@ -41,7 +39,7 @@ connection.query('select * from products', (err, res, fields) => {
         message: "Please select what you would like to purchase",
         choices: print_arr,
         }]).then((answers) => {
-            console.log(answers);
+            console.log(answers.products);
             inquirer.prompt([{
                 type: "input",
                 name: "quantity",
@@ -56,9 +54,6 @@ connection.query('select * from products', (err, res, fields) => {
 
 });
 
-
-connect = 0;
-};
 connection.end();
 
 
